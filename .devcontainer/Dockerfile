@@ -1,2 +1,2 @@
-# [Choice] Python version: 3.9, 3.10, 3.11
-FROM python:latest
+ARG VARIANT="6.0-jammy"
+FROM mcr.microsoft.com/dotnet/sdk:${VARIANT}
