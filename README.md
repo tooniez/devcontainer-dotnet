@@ -1,9 +1,11 @@
-# DevContainer Base template
+# DevContainer Base template for .NET Development
 
-This repository contains a DevContainer base configuration for a development environment. It provides a consistent, reproducible setup for developers working on projects that involve these technologies.
+This repository contains a DevContainer base configuration for a .NET development environment. It provides a consistent, reproducible setup for developers working on .NET projects.
 
 ## Features
 
+- .NET SDK 6.0
+- Azure CLI
 - Common development utilities
 - Pre-configured VS Code settings and extensions
 - Zsh with Oh My Zsh
@@ -16,11 +18,11 @@ The DevContainer is defined by several configuration files:
 1. `.devcontainer/devcontainer.json`: The main configuration file that specifies:
    - Base image and build instructions
    - Ports to forward
-   - Features to install
+   - Features to install (including Azure CLI)
    - VS Code extensions and settings
    - Commands to run on container creation
 
-2. `.devcontainer/Dockerfile`: Defines the custom Docker image.
+2. `.devcontainer/Dockerfile`: Defines the custom Docker image based on the .NET SDK.
 
 3. `.devcontainer/on-create.sh`: A script that runs when the container is created, installing additional packages and configuring git.
 
@@ -33,7 +35,7 @@ The DevContainer is defined by several configuration files:
 3. Open the repository in VS Code.
 4. When prompted, click "Reopen in Container" or run the "Remote-Containers: Reopen in Container" command.
 5. VS Code will build the Docker image and start the container. This may take a few minutes the first time.
-6. Once the container is running, you'll have a fully configured development environment for Node.js and Python.
+6. Once the container is running, you'll have a fully configured development environment for .NET.
 
 ## Customization
 
@@ -44,13 +46,38 @@ You can customize the DevContainer by modifying the configuration files:
 - Add additional software or configuration in the `Dockerfile`
 - Modify the setup scripts (`on-create.sh` and `post-create.sh`) to add your own initialization steps
 
+## Included Tools and Extensions
+
+- .NET SDK 6.0
+- Azure CLI
+- Git
+- GitHub Pull Requests and Issues
+- Azure Bicep
+- GitLens
+- EditorConfig
+- C# extensions and tools
+- PowerShell
+- Azure Tools
+- IntelliCode
+- Prettier
+
+## Ports
+
+The following ports are forwarded:
+
+- 7071: Azure Functions
+- 10000, 10001, 10002: Azurite
+- 5000, 5001: ASP.NET Core Web/API App, Blazor App
+- 4280: Azure Static Web Apps
+
 ## Benefits
 
-- Consistent development environment across team members
+- Consistent .NET development environment across team members
 - Easy onboarding for new developers
 - Isolation from the host system
+- Pre-configured for Azure development
 
 ## License
 
 Copyright © 2024 [tooniez](https://github.com/tooniez). <br />
-This project is [MIT](https://github.com/tooniez/devcontainer-base/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/tooniez/devcontainer-dotnet/blob/main/LICENSE) licensed.
