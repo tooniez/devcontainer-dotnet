@@ -1,17 +1,30 @@
 {
-  "name": "DevContainer Base template",
+  "name": "DevContainer for .NET",
 
   "build": {
     "dockerfile": "./Dockerfile",
-    "context": "."
+    "context": ".",
+    "args": {
+      "VARIANT": "6.0-jammy"
+    }
   },
 
   "forwardPorts": [
-    // typical ports
-    3000, 8080, 5000
+    // Azure Functions
+    7071,
+    // Azurite
+    10000, 10001, 10002,
+    // ASP.NET Core Web/API App, Blazor App
+    5000, 5001,
+    // Azure Static Web Apps
+    4280
   ],
 
   "features": {
+    "ghcr.io/devcontainers/features/azure-cli:latest": {
+      "version": "latest"
+    },
+
     // Install common utilities
     "ghcr.io/devcontainers/features/common-utils:latest": {
       "installZsh": true,
@@ -30,14 +43,18 @@
   "customizations": {
     "vscode": {
       "extensions": [
-
-        // General extensions
-        "GitHub.copilot",
-        "GitHub.copilot-labs",
-        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "ms-azuretools.vscode-bicep",
         "eamodio.gitlens",
         "EditorConfig.EditorConfig",
-        "streetsidesoftware.code-spell-checker",
+        "Fudge.auto-using",
+        "jongrant.csharpsortusings",
+        "kreativ-software.csharpextensions",
+        "microsoft-IsvExpTools.powerplatform-vscode",
+        "ms-dotnettools.csharp",
+        "ms-vscode.PowerShell",
+        "ms-vscode.vscode-node-azure-pack",
+        "VisualStudioExptTeam.vscodeintellicode",
         "esbenp.prettier-vscode"
       ],
 
@@ -52,24 +69,9 @@
         "explorer.sortOrder": "type",
         "explorer.fileNesting.enabled": true,
         "explorer.fileNesting.patterns": {
-          "*.js": "${capture}.js.map",
-          "*.ts": "${capture}.js",
-          "*.py": "${capture}.pyc"
-        },
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.linting.enabled": true,
-        "python.linting.pylintEnabled": true,
-        "python.formatting.provider": "black",
-        "[python]": {
-          "editor.formatOnSave": true
-        },
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.formatOnSave": true
-        },
-        "[typescript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode",
-          "editor.formatOnSave": true
+          "*.bicep": "${capture}.json,${capture}.parameters.json",
+          "*.razor": "${capture}.razor.cs,${capture}.razor.css",
+          "*.js": "${capture}.js.map"
         }
       }
     }
